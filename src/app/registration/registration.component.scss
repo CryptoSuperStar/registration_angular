@@ -1,0 +1,15 @@
+.reg_container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.mat-mdc-form-field {
+    width: 400px;
+}
+.btn_group {
+    display: flex;
+    gap: 10px
+}

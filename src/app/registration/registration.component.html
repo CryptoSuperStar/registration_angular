@@ -1,0 +1,26 @@
+<div class="reg_container">
+    <mat-label>Registration Form</mat-label>
+    <form [formGroup]="registrationForm" >
+        <div *ngFor="let field of registrationFields">
+            <ng-container [ngSwitch]="field.name">
+                <app-password-input *ngSwitchCase="'password'"  [label]="field.label" [control]="registrationForm.get(field.name)"></app-password-input>
+                <app-phone-input *ngSwitchCase="'phone_number'"  [label]="field.label" [control]="registrationForm.get(field.name)"></app-phone-input>
+                <mat-form-field *ngSwitchDefault appearance="fill" class="form-field">
+                    <mat-label>{{ field.label }}</mat-label>
+                    <input matInput  [type]="field.type" [formControlName]="field.name"/>
+                </mat-form-field>
+            </ng-container>
+            <div *ngIf="registrationForm.get(field.name)?.invalid && (registrationForm.get(field.name)?.dirty || registrationForm.get(field.name)?.touched)">
+                <div class="MuiTypography-root MuiTypography-body2 MuiTypography-colorError MuiFormControl-error">
+                  {{ getErrorMessage(field.name) }}
+                </div>
+              </div>
+        </div>
+        <div class="btn_group">
+            <button mat-raised-button color="primary" (click)="submitRegistration()" type="submit" [disabled]="!registrationForm.valid">
+                Register
+            </button>
+            <button routerLink="/" mat-raised-button color="warn">Cancel</button>
+        </div>
+    </form>
+</div>
